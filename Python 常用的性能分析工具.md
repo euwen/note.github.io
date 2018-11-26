@@ -127,7 +127,7 @@ memory_profiler 模块能够逐行测量内存的占用情况
 2. 使用
 命令如下:
 
-    python -m memory_profiler cp02/demo01.py
+        python -m memory_profiler cp02/demo01.py
 
 得到结果各项含义为
 
