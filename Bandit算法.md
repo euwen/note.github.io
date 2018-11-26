@@ -43,7 +43,7 @@ Bandit算法与推荐系统
 
 而我说：算法要是无憾，那应该是过拟合了。
 
-所以说：怎么衡量不同Bandit算法在解决多臂问题上的效果？首先介绍一个概念，叫做累积遗憾（regret）[2]：
+所以说：怎么衡量不同Bandit算法在解决多臂问题上的效果？首先介绍一个概念，叫做累积遗憾（regret）：
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
  $$R_T$$
@@ -72,18 +72,13 @@ Thompson sampling算法简单实用，因为它只有一行代码就可以实现
 怎么能估计“概率p的概率分布”呢？ 答案是假设概率p的概率分布符合beta(wins, lose)分布，它有两个参数: wins, lose。
 每个臂都维护一个beta分布的参数。每次试验后，选中一个臂，摇一下，有收益则该臂的wins增加1，否则该臂的lose增加1。
 每次选择臂的方式是：用每个臂现有的beta分布产生一个随机数b，选择所有臂产生的随机数中最大的那个臂去摇。
-import  numpy as np
-import  pymc
-#wins 和 trials 是一个N维向量，N是赌博机的臂的个数，每个元素记录了
-choice = np.argmax(pymc.rbeta(1 + wins, 1 + trials - wins)) 
-wins[choice] += 1
-trials += 1
-1
-2
-3
-4
-5
-6
+    import  numpy as np
+    import  pymc
+    #wins 和 trials 是一个N维向量，N是赌博机的臂的个数，每个元素记录了
+    choice = np.argmax(pymc.rbeta(1 + wins, 1 + trials - wins)) 
+    wins[choice] += 1
+    trials += 1
+
 UCB算法
 
 UCB算法全称是Upper Confidence Bound（置信区间上界），它的算法步骤如下[4]：
@@ -100,9 +95,9 @@ Epsilon-Greedy算法
 
 这是一个朴素的Bandit算法，有点类似模拟退火的思想：
 
-选一个（0,1）之间较小的数作为epsilon；
-每次以概率epsilon做一件事：所有臂中随机选一个；
-每次以概率1-epsilon 选择截止到当前，平均收益最大的那个臂。
+选一个（0,1）之间较小的数作为epsilon；  
+每次以概率epsilon做一件事：所有臂中随机选一个；  
+每次以概率1-epsilon 选择截止到当前，平均收益最大的那个臂。  
 是不是简单粗暴？epsilon的值可以控制对Exploit和Explore的偏好程度。越接近0，越保守，只想花钱不想挣钱。
 
 朴素Bandit算法
