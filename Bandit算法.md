@@ -45,9 +45,7 @@ Bandit算法与推荐系统
 
 所以说：怎么衡量不同Bandit算法在解决多臂问题上的效果？首先介绍一个概念，叫做累积遗憾（regret）：
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
- $$R_T$$
-
+<a href="https://www.codecogs.com/eqnedit.php?latex=R_T&space;=&space;\sum_{i=1}^T&space;(W_{opt}&space;-&space;W_{B(i)})&space;=&space;Tw^*&space;-&space;\sum_{i=1}^T&space;W_{B(i)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?R_T&space;=&space;\sum_{i=1}^T&space;(W_{opt}&space;-&space;W_{B(i)})&space;=&space;Tw^*&space;-&space;\sum_{i=1}^T&space;W_{B(i)}" title="R_T = \sum_{i=1}^T (W_{opt} - W_{B(i)}) = Tw^* - \sum_{i=1}^T W_{B(i)}" /></a>
 
 图2 积累遗憾
 这个公式就是计算Bandit算法的累积遗憾，解释一下：
@@ -72,6 +70,7 @@ Thompson sampling算法简单实用，因为它只有一行代码就可以实现
 怎么能估计“概率p的概率分布”呢？ 答案是假设概率p的概率分布符合beta(wins, lose)分布，它有两个参数: wins, lose。
 每个臂都维护一个beta分布的参数。每次试验后，选中一个臂，摇一下，有收益则该臂的wins增加1，否则该臂的lose增加1。
 每次选择臂的方式是：用每个臂现有的beta分布产生一个随机数b，选择所有臂产生的随机数中最大的那个臂去摇。
+
     import  numpy as np
     import  pymc
     #wins 和 trials 是一个N维向量，N是赌博机的臂的个数，每个元素记录了
