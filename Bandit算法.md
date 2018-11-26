@@ -46,7 +46,7 @@ Bandit算法与推荐系统
 所以说：怎么衡量不同Bandit算法在解决多臂问题上的效果？首先介绍一个概念，叫做累积遗憾（regret）[2]：
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-$$R_T$$
+ $$R_T$$
 
 
 图2 积累遗憾
