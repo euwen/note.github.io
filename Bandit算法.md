@@ -47,7 +47,8 @@ Bandit算法与推荐系统
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=R_T&space;=&space;\sum_{i=1}^T&space;(W_{opt}&space;-&space;W_{B(i)})&space;=&space;Tw^*&space;-&space;\sum_{i=1}^T&space;W_{B(i)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?R_T&space;=&space;\sum_{i=1}^T&space;(W_{opt}&space;-&space;W_{B(i)})&space;=&space;Tw^*&space;-&space;\sum_{i=1}^T&space;W_{B(i)}" title="R_T = \sum_{i=1}^T (W_{opt} - W_{B(i)}) = Tw^* - \sum_{i=1}^T W_{B(i)}" /></a>
 
-图2 积累遗憾
+图1 积累遗憾
+
 这个公式就是计算Bandit算法的累积遗憾，解释一下：
 
 首先，这里我们讨论的每个臂的收益非0即1，也就是伯努利收益。
@@ -84,9 +85,10 @@ UCB算法全称是Upper Confidence Bound（置信区间上界），它的算法�
 
 初始化：先对每一个臂都试一遍；
 按照如下公式计算每个臂的分数，然后选择分数最大的臂作为选择：
+<a href="https://www.codecogs.com/eqnedit.php?latex=\bar{x}_j(t)&plus;\sqrt{\frac{2\ln&space;t}{T_{j,t}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bar{x}_j(t)&plus;\sqrt{\frac{2\ln&space;t}{T_{j,t}}}" title="\bar{x}_j(t)+\sqrt{\frac{2\ln t}{T_{j,t}}}" /></a>
 
+图2 UCB算法
 
-图3 UCB算法
 观察选择结果，更新t和Tjt。其中加号前面是这个臂到目前的收益均值，后面的叫做bonus，本质上是均值的标准差，t是目前的试验次数，Tjt是这个臂被试次数。
 这个公式反映一个特点：均值越大，标准差越小，被选中的概率会越来越大，同时哪些被选次数较少的臂也会得到试验机会。
 
@@ -94,18 +96,17 @@ Epsilon-Greedy算法
 
 这是一个朴素的Bandit算法，有点类似模拟退火的思想：
 
-选一个（0,1）之间较小的数作为epsilon；  
-每次以概率epsilon做一件事：所有臂中随机选一个；  
-每次以概率1-epsilon 选择截止到当前，平均收益最大的那个臂。  
+    选一个（0,1）之间较小的数作为epsilon；  
+    每次以概率epsilon做一件事：所有臂中随机选一个；  
+    每次以概率1-epsilon 选择截止到当前，平均收益最大的那个臂。  
 是不是简单粗暴？epsilon的值可以控制对Exploit和Explore的偏好程度。越接近0，越保守，只想花钱不想挣钱。
 
 朴素Bandit算法
 
 最朴素的Bandit算法就是：先随机试若干次，计算每个臂的平均收益，一直选均值最大那个臂。这个算法是人类在实际中最常采用的，不可否认，它还是比随机乱猜要好。
 
-以上五个算法，我们用10000次模拟试验的方式对比了其效果如图4，实验代码来源 [5]：
-
-
+以上五个算法，我们用10000次模拟试验的方式对比了其效果如图4，：
+https://img-blog.csdn.net/20170503182820084
 
 图4 五种Bandit算法模拟试验的效果图
 算法效果对比一目了然：UCB算法和Thompson采样算法显著优秀一些。
