@@ -23,7 +23,7 @@ Python 提供了 timeit 模块来测量代码的执行速度，可以用该模�
 
 代码示例:
 
-python3.6 -m timeit -n 5 -r 5 -s "import module_name" "module_name.func(*args, **kwargs)"
+    python3.6 -m timeit -n 5 -r 5 -s "import module_name" "module_name.func(*args, **kwargs)"
 
 简要对上面的语句作下说明:
 
@@ -36,15 +36,15 @@ python3.6 -m timeit -n 5 -r 5 -s "import module_name" "module_name.func(*args, *
 timeit 模块暂时禁用了垃圾收集器，当你的操作会调用到垃圾收集器时可能会影响到实际操作的速度
 在 ipython 中也可以使用 %timeit 模块，实例代码如下:
 
-In [1]: from module_name import func_name
+    In [1]: from module_name import func_name
 
-In [2]: %timeit func_name(*args, **kwargs)
+    In [2]: %timeit func_name(*args, **kwargs)
 
 
 三. Unix 系统命令 time 计时
 Unix 提供了系统命令 time， 可以用它来记录程序耗费的各方面时间
 
-/usr/bin/time -lp demo.py
+    /usr/bin/time -lp demo.py
 
 -p 命令会显示三个结果:
 
@@ -59,27 +59,27 @@ sys: 记录了内核函数耗费的时间
 四. cProfile 模块
 cProfile 是标准库内建的分析工具，可以用来测量每一个函数的执行时间。其基本的使用命令如下:
 
-python -m cProfile -s cumulative cp02/demo01.py
+    python -m cProfile -s cumulative cp02/demo01.py
 
 -m 表示执行 cProfile 模块， -s cumulative 表示对每个函数累计花费时间进行排序，可以让我们很直观的看到哪一部分的代码执行的最慢。 
 其结果如下:
 
 更好用的方式是生成一个统计文件，然后通过 pstats 模块进行分析，命令如下:
 
-python -m cProfile -o profile.stats cp02/demo01.py
+    python -m cProfile -o profile.stats cp02/demo01.py
 
 这样将统计结果存储到 profile.stats 文件之后就可以通过 pstats 模块来查看了，代码如下:
 
-import pstats
-#
-# p = pstats.Stats('profile.stats')
-# p.sort_stats("cumulative")
-# 输出累计时间报告
-p.print_stats()
-# 输出调用者的信息
-p.print_callers()
-# 输出哪个函数调用了哪个函数
-p.print_callees()
+    import pstats
+    #
+    # p = pstats.Stats('profile.stats')
+    # p.sort_stats("cumulative")
+    # 输出累计时间报告
+    p.print_stats()
+    # 输出调用者的信息
+    p.print_callers()
+    # 输出哪个函数调用了哪个函数
+    p.print_callees()
 
 print_stats() 函数的输出其各项的含义如下：
 
@@ -96,17 +96,16 @@ line_profiler 可以对函数进行逐行分析，是调查 Python 的 CPU 密�
 然后在对有性能瓶颈的函数进行逐行分析。
 
 1.安装 line_profiler
-pip install line_profiler
+    pip install line_profiler
 
 2. 使用 line_profiler
 首先在要分析的函数上添加装饰器 @profile
 然后使用 kernprof 命令执行对应的 Python 代码，如下:
-kernprof -l cp02/demo01.py
+    kernprof -l cp02/demo01.py
 
 -l 参数那个了表示逐行分析，另外还可以有 -v 参数用来显示输出，不加的话会生成一个 .lprof 的输出文件。得到文件后可以用下面命令查看:
 
-python -m line_profiler demo01.py.lprof
-
+    python -m line_profiler demo01.py.lprof
 
 其各项含义为:
 
@@ -122,13 +121,13 @@ Line Contents: 代码内容
 memory_profiler 模块能够逐行测量内存的占用情况
 
 1. 安装
-pip install psutil # 需要先安装 psutil 模块
-pip install memory_profiler
+    pip install psutil # 需要先安装 psutil 模块
+    pip install memory_profiler
 
 2. 使用
 命令如下:
 
-python -m memory_profiler cp02/demo01.py
+    python -m memory_profiler cp02/demo01.py
 
 得到结果各项含义为
 
@@ -136,12 +135,12 @@ Mem Usage: 内存占用情况
 Increment: 执行该行代码后新增的内存
 另外 memory_profiler 提供了一个 mprof 进行可视化的内存展示，使用该命令需要安装 matplotlib
 
-pip install matplotlib
+    pip install matplotlib
 
 然后执行如下命令:
 
-mprof run cp02/demo01.py  # 生成统计文件
-mprof plot mprofile_20170904220625.dat  # 展示统计文件
+    mprof run cp02/demo01.py  # 生成统计文件
+    mprof plot mprofile_20170904220625.dat  # 展示统计文件
 
 --------------------- 
 原文：https://blog.csdn.net/Ahri_J/article/details/77860246 
