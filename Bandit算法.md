@@ -1,4 +1,4 @@
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 
 推荐系统里面有两个经典问题：EE和冷启动。前者涉及到平衡准确和多样，后者涉及到产品算法运营等一系列。Bandit算法是一种简单的在线学习算法，常常用于尝试解决这两个问题，本文为你介绍基础的Bandit算法及一系列升级版，以及对推荐系统这两个经典问题的思考。
 
@@ -45,6 +45,7 @@ Bandit算法与推荐系统
 
 所以说：怎么衡量不同Bandit算法在解决多臂问题上的效果？首先介绍一个概念，叫做累积遗憾（regret）[2]：
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 $$R_T$$
 
 
