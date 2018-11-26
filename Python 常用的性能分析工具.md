@@ -33,7 +33,7 @@ Python 提供了 timeit 模块来测量代码的执行速度，可以用该模�
 -s: 表示导入要执行的代码所属的 module, 后面就是通过 module_name.func_name() 表示要测试执行的代码了  
 使用 timeit 模块有几点注意:
 
-timeit 模块暂时禁用了垃圾收集器，当你的操作会调用到垃圾收集器时可能会影响到实际操作的速度
+timeit 模块暂时禁用了垃圾收集器，当你的操作会调用到垃圾收集器时可能会影响到实际操作的速度  
 在 ipython 中也可以使用 %timeit 模块，实例代码如下:
 
     In [1]: from module_name import func_name
@@ -48,11 +48,10 @@ Unix 提供了系统命令 time， 可以用它来记录程序耗费的各方面
 
 -p 命令会显示三个结果:
 
-real: 记录整体的耗时
-user: 记录 CPU 花在任务上的时间，但不包括内核函数耗费的时间
-sys: 记录了内核函数耗费的时间
-加上 -l 命令之后会显示更多信息，如下： 
- 
+real: 记录整体的耗时  
+user: 记录 CPU 花在任务上的时间，但不包括内核函数耗费的时间  
+sys: 记录了内核函数耗费的时间  
+加上 -l 命令之后会显示更多信息 
 
 关于 time 命令就记这些吧，基本够用，详细用法可以参与这篇文档: time 命令
 
@@ -62,7 +61,6 @@ cProfile 是标准库内建的分析工具，可以用来测量每一个函数�
     python -m cProfile -s cumulative cp02/demo01.py
 
 -m 表示执行 cProfile 模块， -s cumulative 表示对每个函数累计花费时间进行排序，可以让我们很直观的看到哪一部分的代码执行的最慢。 
-其结果如下:
 
 更好用的方式是生成一个统计文件，然后通过 pstats 模块进行分析，命令如下:
 
@@ -83,12 +81,12 @@ cProfile 是标准库内建的分析工具，可以用来测量每一个函数�
 
 print_stats() 函数的输出其各项的含义如下：
 
-ncalls: 函数执行次数
-tottime: 累计耗时
-percall: 每次耗时
-cumtime: 包括子函数的执行时间
-percall 每次的执行时间
-filename:lineno(function): 文件名+代码行数+方法名
+ncalls: 函数执行次数  
+tottime: 累计耗时  
+percall: 每次耗时  
+cumtime: 包括子函数的执行时间  
+percall 每次的执行时间  
+filename:lineno(function): 文件名+代码行数+方法名  
 通过 cProfile 可以快速的定位出现性能瓶颈的函数，然后在针对函数进行进一步的分析。下面是逐行代码分析的 line_profiler 工具
 
 五. line_profiler – 逐行代码分析工具
@@ -109,12 +107,12 @@ line_profiler 可以对函数进行逐行分析，是调查 Python 的 CPU 密�
 
 其各项含义为:
 
-Line: 代码行数
-Hits: 执行次数
-Time: 占用的总时间
-Per Hit: 每次执行的时间
-Time: 时间占比
-Line Contents: 代码内容
+Line: 代码行数  
+Hits: 执行次数  
+Time: 占用的总时间  
+Per Hit: 每次执行的时间  
+Time: 时间占比  
+Line Contents: 代码内容  
 注意，在下面提到的 memory_profiler 中也会有一个 @profile 的装饰器，会和 line_profiler 的冲突，使用的时候不要弄混了。
 
 六. memory_profiler – 诊断内存的用量
@@ -131,8 +129,8 @@ memory_profiler 模块能够逐行测量内存的占用情况
 
 得到结果各项含义为
 
-Mem Usage: 内存占用情况
-Increment: 执行该行代码后新增的内存
+Mem Usage: 内存占用情况  
+Increment: 执行该行代码后新增的内存  
 另外 memory_profiler 提供了一个 mprof 进行可视化的内存展示，使用该命令需要安装 matplotlib
 
     pip install matplotlib
