@@ -85,6 +85,7 @@ UCB算法全称是Upper Confidence Bound（置信区间上界），它的算法�
 
 初始化：先对每一个臂都试一遍；
 按照如下公式计算每个臂的分数，然后选择分数最大的臂作为选择：
+
 <a href="https://www.codecogs.com/eqnedit.php?latex=\bar{x}_j(t)&plus;\sqrt{\frac{2\ln&space;t}{T_{j,t}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bar{x}_j(t)&plus;\sqrt{\frac{2\ln&space;t}{T_{j,t}}}" title="\bar{x}_j(t)+\sqrt{\frac{2\ln t}{T_{j,t}}}" /></a>
 
 图2 UCB算法
