@@ -1,6 +1,7 @@
 一. 基本的查询运行时间工具 — time
 性能分析最基本的就是查看某段代码的运行时间，这个最常规简单的方式就是通过 Python 的 time 模块进行计算，代码示例如下:
 
+```python
 def add(a, b)
   retutn a + b
 
@@ -16,6 +17,7 @@ end = time.time()
 escape = end - start
 # 打印查看
 print(escape)
+```
 
 二. 通过 timeit 模块计算代码执行时间
 Python 提供了 timeit 模块来测量代码的执行速度，可以用该模块来对各种简单的语句进行计时
