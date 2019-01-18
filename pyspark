@@ -1,0 +1,33 @@
+setConf方法里原来是根据特定的字符串对scan进行配置，那么在Python里对conf就可以进行相应的设置，这些设置主要包括：
+
+
+hbase.mapreduce.scan.row.start
+hbase.mapreduce.scan.row.stop
+hbase.mapreduce.scan.column.family
+hbase.mapreduce.scan.columns
+hbase.mapreduce.scan.timestamp
+hbase.mapreduce.scan.timerange.start
+hbase.mapreduce.scan.timerange.end
+hbase.mapreduce.scan.maxversions
+hbase.mapreduce.scan.cacheblocks
+hbase.mapreduce.scan.cachedrows
+hbase.mapreduce.scan.batchsize
+
+设置scan范围的示例代码如下：
+
+sc = SparkContext(appName=settings.APP_NAME)
+conf = {
+        "hbase.zookeeper.quorum": settings.HBASE_HOST,
+        "hbase.mapreduce.inputtable": "test",
+        "hbase.mapreduce.scan.row.start": "row2"
+    }
+rdd = sc.newAPIHadoopRDD(
+    "org.apache.hadoop.hbase.mapreduce.TableInputFormat",
+    "org.apache.hadoop.hbase.io.ImmutableBytesWritable",
+    "org.apache.hadoop.hbase.client.Result",
+    keyConverter="org.valux.converters.ImmutableBytesWritableToStringConverter",
+    valueConverter="org.valux.converters.HBaseResultToStringConverter",
+    conf=conf)
+result = rdd.collect()
+for (k, v) in result
+    print k, v
