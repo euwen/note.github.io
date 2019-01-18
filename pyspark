@@ -1,6 +1,5 @@
 setConf方法里原来是根据特定的字符串对scan进行配置，那么在Python里对conf就可以进行相应的设置，这些设置主要包括：
 
-
 hbase.mapreduce.scan.row.start
 hbase.mapreduce.scan.row.stop
 hbase.mapreduce.scan.column.family
@@ -21,12 +20,16 @@ conf = {
         "hbase.mapreduce.inputtable": "test",
         "hbase.mapreduce.scan.row.start": "row2"
     }
+    
+keyConv = "org.apache.spark.examples.pythonconverters.ImmutableBytesWritableToStringConverter"
+valueConv = "org.apache.spark.examples.pythonconverters.HBaseResultToStringConverter"
+
 rdd = sc.newAPIHadoopRDD(
     "org.apache.hadoop.hbase.mapreduce.TableInputFormat",
     "org.apache.hadoop.hbase.io.ImmutableBytesWritable",
     "org.apache.hadoop.hbase.client.Result",
-    keyConverter="org.valux.converters.ImmutableBytesWritableToStringConverter",
-    valueConverter="org.valux.converters.HBaseResultToStringConverter",
+    keyConverter=keyConv
+    valueConverter=valueConv,
     conf=conf)
 result = rdd.collect()
 for (k, v) in result
