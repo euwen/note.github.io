@@ -1,3 +1,7 @@
+hbase源码
+
+        org.apache.hadoop.hbase.mapreduce.TableInputFormat
+
 setConf方法里原来是根据特定的字符串对scan进行配置，那么在Python里对conf就可以进行相应的设置，这些设置主要包括：
 
 hbase.mapreduce.scan.row.start
