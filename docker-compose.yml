@@ -1,0 +1,37 @@
+version: '2.1'
+
+services:
+    redis:
+        image: 'redis:latest'
+        restart: always
+        # command: redis-server --requirepass redispass
+        ports:
+            - "56379:6379"
+        environment:
+            - TZ=Asia/Shanghai
+        volumes:
+        - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+        command: redis-server /usr/local/etc/redis/redis.conf
+
+
+    wifidata:
+        image: euwen/wifidata:latest
+        restart: always
+        stdin_open: true
+        tty: true
+        depends_on:
+            - redis
+        volumes:
+            - ./app:/home/wifidata/app
+        ports:
+            - "48090:8090"
+            - "48091:8091"
+            - "48092:8092"
+            - "48093:8093"
+            - "48094:8094"
+            - "48095:8095"
+            - "48096:8096"
+            - "48097:8097"
+            - "0.0.0.0:20700:8098/udp"
+            - "0.0.0.0:20701:8099/udp"
+        command: python app/wifiServer.py
